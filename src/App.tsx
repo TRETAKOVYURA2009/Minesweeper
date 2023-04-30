@@ -1,11 +1,16 @@
-import './App.css';
+import React from "react"
+import Field from "./components/Field"
 
-function App() {
-  return (
-    <div className="App">
-      Hello world!
-    </div>
-  );
-}
+const App: React.FC = () => (
+  <div className="App">
+    Minesweeper
+    <Field
+      field={[
+        [0, 0],
+        [0, 0],
+      ]}
+    />
+  </div>
+)
 
-export default App;
+export default App
