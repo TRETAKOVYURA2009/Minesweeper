@@ -21,7 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint ."
+    "lint": "eslint --fix src"
   },
   "eslintConfig": {
     "extends": [
@@ -51,5 +51,13 @@
     "postcss": "^8.4.23",
     "prettier": "^2.8.8",
     "tailwindcss": "^3.3.2"
-  }
+  },
+  "lint-staged": {
+		"*.+(js|jsx|ts|tsx)": [
+			"eslint --fix"
+		],
+		"*.+(js|jsx|ts|tsx|json|css|md|mdx)": [
+			"prettier --write"
+		]
+	}
 }

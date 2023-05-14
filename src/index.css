@@ -25,7 +25,7 @@ code {
 
 @font-face {
   font-family: "MontExtralight";
-  src: url("C:\Users\Anna Rajkova\JsProjects\Minesweeper\fonts\mont_heavydemo.ttf") format("truetype");
+  src: url("../fonts/mont_heavydemo.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
