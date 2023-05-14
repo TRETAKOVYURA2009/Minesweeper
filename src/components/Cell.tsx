@@ -11,8 +11,8 @@ const CellWrapper: React.FC<PropsWithChildren<CellWrapperProps>> = ({
   opened = false,
 }) => (
   <div
-    className={`border-2 border-black w-7 h-7 bg-white numbers flex justify-center items-center field-cell overflow-hidden
-    ${opened ? "shadow-inner" : "bg-white"}`}
+    className={`w-7 h-7 numbers flex justify-center items-center field-cell overflow-hidden
+    ${opened ? "bg-white opened" : "bg-neutral-300"}`}
   >
     {children}
   </div>

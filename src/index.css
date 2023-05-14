@@ -47,3 +47,13 @@ code {
 #field :last-child :last-child .field-cell {
   border-radius: 0 0 0.23rem 0;
 }
+
+.field-cell {
+  border: 2px solid;
+  border-color: #f3f3f3 #5e5e5e #5e5e5e #f3f3f3;
+  outline: 1px solid black;
+}
+.field-cell.opened{
+  border: 0;
+  outline: 1px solid black;
+}
