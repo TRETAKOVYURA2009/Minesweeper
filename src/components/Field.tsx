@@ -32,7 +32,10 @@ const Field: React.FC<FieldProps> = ({
   }
 
   return (
-    <div className="flex flex-col border-2 border-neutral-400 w-fit">
+    <div
+      className="flex flex-col border-2 border-black w-fit rounded-md"
+      id="field"
+    >
       {field.map((row, rIndex) => (
         <div className="flex">
           {row.map((value, cIndex) => (
