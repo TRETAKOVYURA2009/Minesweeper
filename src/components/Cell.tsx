@@ -11,8 +11,9 @@ const CellWrapper: React.FC<PropsWithChildren<CellWrapperProps>> = ({
   opened = false,
 }) => (
   <div
-    className={`w-7 h-7 numbers flex justify-center items-center field-cell overflow-hidden
-    ${opened ? "bg-white opened" : "bg-neutral-300"}`}
+    className={`w-7 h-7 numbers flex justify-center items-center field-cell overflow-hidden ${
+      opened ? "bg-white opened" : "bg-neutral-300"
+    }`}
   >
     {children}
   </div>
@@ -43,7 +44,7 @@ const Cell: React.FC<CellProps> = ({ value, isOpened, isMarked, onClick }) => {
   }
   if (isMarked) {
     return (
-      <div onClick={onClick} onContextMenu={onClick}>
+      <div onClick={onClick} onContextMenu={onClick} className="bg-neutral-200">
         <CellWrapper>
           <div className="w-5 h-5">
             <FlagIcon />
@@ -53,7 +54,7 @@ const Cell: React.FC<CellProps> = ({ value, isOpened, isMarked, onClick }) => {
     )
   }
   return (
-    <div onClick={onClick} onContextMenu={onClick}>
+    <div onClick={onClick} onContextMenu={onClick} className="bg-neutral-100">
       <CellWrapper />
     </div>
   )
