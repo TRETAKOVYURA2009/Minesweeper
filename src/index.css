@@ -57,3 +57,6 @@ code {
   border: 0;
   outline: 1px solid black;
 }
+.field-cell.explosion{
+  background: #f20606;
+}

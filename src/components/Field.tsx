@@ -43,6 +43,7 @@ const Field: React.FC<FieldProps> = ({
               value={value}
               isOpened={isOpenedMatrix[rIndex][cIndex]}
               isMarked={isMarkedMatrix[rIndex][cIndex]}
+              isExplosion={field[rIndex][cIndex] === -2}
               onClick={(event) => handleCellClick(event, rIndex, cIndex)}
             />
           ))}
