@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Field from "./Field"
-import { generateFieldMatrix, getMines, getOpenedCellNewMatrix } from "./utils"
+import logic from "../gameLogic"
+import GameStatus from "../types/game"
 
 interface GameProps {
   fieldWidth: number
@@ -13,74 +14,58 @@ const Game: React.FC<GameProps> = ({
   fieldHeight,
   countOfMines,
 }) => {
-  const [isOpenedMatrix, setIsOpenedMatrix] = useState<boolean[][]>(
-    Array(fieldHeight)
-      .fill(null)
-      .map(() => Array(fieldWidth).fill(false))
+  const [isOpenedMatrix, setIsOpenedMatrix] = useState(
+    logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
   )
   const [isMarkedMatrix, setIsMarkedMatrix] = useState<boolean[][]>(
-    Array(fieldHeight)
-      .fill(null)
-      .map(() => Array(fieldWidth).fill(false))
+    logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
   )
   const [field, setField] = useState<number[][]>(
-    Array(fieldHeight)
-      .fill(null)
-      .map(() => Array(fieldWidth).fill(0))
+    logic.createMatrixWithValue(0, fieldWidth, fieldHeight)
   )
   const [openedCount, setOpenedCount] = useState<number>(0)
   const [markedCount, setMarkedCount] = useState<number>(0)
-  const [visitedCells, setVisitedCells] = useState<Set<unknown>>(new Set())
-  const [isGameOver, setIsGameOver] = useState<boolean>(false)
+  const [status, setStatus] = useState<GameStatus>(GameStatus.notStarted)
 
   const openCell = (rowIndex: number, colIndex: number, fIeld: number[][]) => {
     if (field[rowIndex][colIndex] === -1) {
-      setIsGameOver(true)
+      setStatus(GameStatus.gameOver)
       setIsOpenedMatrix(
-        Array(fieldHeight)
-          .fill(null)
-          .map(() => Array(fieldWidth).fill(true))
+        logic.createMatrixWithValue(true, fieldWidth, fieldHeight)
       )
       const newField = [...field]
       newField[rowIndex][colIndex] = -2
       setField(newField)
     } else {
-      const {
-        matrix: newIsOpenedMatrix,
-        count: newOpenedCount,
-        visited: newVisetedCells,
-      } = getOpenedCellNewMatrix(
+      const newIsOpenedMatrix = logic.getOpenedCellNewMatrix(
         isOpenedMatrix,
         fIeld,
         colIndex,
-        rowIndex,
-        openedCount,
-        visitedCells
+        rowIndex
       )
       setIsOpenedMatrix(newIsOpenedMatrix)
-      setOpenedCount(newOpenedCount)
-      setVisitedCells(newVisetedCells)
+      setOpenedCount(logic.countOpenedCells(isOpenedMatrix))
     }
   }
 
   const generateField = (rowIndex: number, colIndex: number) => {
-    const mines = getMines(
+    const mines = logic.getMines(
       rowIndex,
       colIndex,
       fieldWidth,
       fieldHeight,
       countOfMines
     )
-    const newField = generateFieldMatrix(fieldHeight, fieldWidth, mines)
-    console.log("mines", mines)
+    const newField = logic.generateFieldMatrix(fieldHeight, fieldWidth, mines)
     setField(newField)
     openCell(rowIndex, colIndex, newField)
+    setStatus(GameStatus.started)
   }
 
   const cellOpenHandler = (rowIndex: number, colIndex: number) => {
-    if (!openedCount) {
+    if (status === GameStatus.notStarted) {
       generateField(rowIndex, colIndex)
-    } else {
+    } else if (status === GameStatus.started) {
       openCell(rowIndex, colIndex, field)
     }
   }
