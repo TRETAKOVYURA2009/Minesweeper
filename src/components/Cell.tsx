@@ -57,7 +57,7 @@ const Cell: React.FC<CellProps> = ({
               <MineIcon />
             </div>
           ) : (
-            <span className="text-xl">{value || ""}</span>
+            <span className="text-xl select-none">{value || ""}</span>
           )}
         </CellWrapper>
       </div>

@@ -17,6 +17,23 @@ code {
     monospace;
 }
 
+
+/* ---- Remove Arrows/Spinners ---- */
+
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
 /* ---- field styles ----*/
 
 .numbers{
@@ -26,6 +43,20 @@ code {
 @font-face {
   font-family: "MontExtralight";
   src: url("../fonts/mont_heavydemo.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Cheque-Black";
+  src: url("../fonts/Cheque-Black.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "CinzelDecorative";
+  src: url("../fonts/CinzelDecorative-Bold.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
@@ -59,4 +90,14 @@ code {
 }
 .field-cell.explosion{
   background: #f20606;
+}
+
+/* ---- finished text ---- */
+
+.win{
+  font-family: "Cheque-Black";
+}
+
+.game-over{
+  font-family: "CinzelDecorative";
 }

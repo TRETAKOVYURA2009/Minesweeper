@@ -5,7 +5,7 @@ export default function getOpenedCellNewMatrix(
   cellY: number
 ) {
   const newIsOpenedMatrix = [...isOpenedMatrix]
-  if (field[cellY][cellX] !== 0) {
+  if (field[cellY][cellX] > 0) {
     newIsOpenedMatrix[cellY][cellX] = true
     return newIsOpenedMatrix
   }

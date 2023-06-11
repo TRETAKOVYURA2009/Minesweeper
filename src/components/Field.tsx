@@ -1,19 +1,24 @@
 import React from "react"
 import Cell from "./Cell"
+import GameStatus from "../types/game"
 
 interface FieldProps {
+  status: GameStatus
   field: number[][]
   isOpenedMatrix: boolean[][]
   isMarkedMatrix: boolean[][]
   onCellOpen: (rowIndex: number, colIndex: number) => void
+  onNearbyOpen: (rowIndex: number, colIned: number) => void
   onCellMark: (rowIndex: number, colIndex: number) => void
 }
 
 const Field: React.FC<FieldProps> = ({
+  status,
   field,
   isOpenedMatrix,
   isMarkedMatrix,
   onCellOpen,
+  onNearbyOpen,
   onCellMark,
 }) => {
   const handleCellClick = (
@@ -24,8 +29,18 @@ const Field: React.FC<FieldProps> = ({
     if (event.nativeEvent.button === 0) {
       if (!isOpenedMatrix[rIndex][cIndex] && !isMarkedMatrix[rIndex][cIndex]) {
         onCellOpen(rIndex, cIndex)
+      } else if (
+        isOpenedMatrix[rIndex][cIndex] &&
+        !isMarkedMatrix[rIndex][cIndex] &&
+        field[rIndex][cIndex] > 0
+      ) {
+        onNearbyOpen(rIndex, cIndex)
       }
-    } else if (event.nativeEvent.button === 2) {
+    } else if (
+      event.nativeEvent.button === 2 &&
+      !isOpenedMatrix[rIndex][cIndex] &&
+      (status === 0 || status === 1)
+    ) {
       onCellMark(rIndex, cIndex)
     }
     event.preventDefault()

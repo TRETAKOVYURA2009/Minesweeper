@@ -25,3 +25,24 @@ export function createMatrixWithValue<Type>(
     .fill(null)
     .map(() => Array(width).fill(value))
 }
+
+export function checkForVictory(
+  openedCount: number,
+  markedCount: number,
+  numberOfCells: number,
+  numberOfMines: number
+) {
+  if (
+    openedCount === numberOfCells - numberOfMines &&
+    markedCount >= numberOfMines
+  ) {
+    return 3
+  }
+  return 1
+}
+
+export function checkForGameOver(status: string) {
+  if (status === "2") return "GAME OVER"
+  if (status === "3") return "WIN"
+  return ""
+}
