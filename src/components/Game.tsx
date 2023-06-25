@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useMemo, useState } from "react"
 import Field from "./Field"
 import logic from "../gameLogic"
 import GameStatus from "../types/game"
@@ -38,6 +38,19 @@ const Game: React.FC<GameProps> = ({
     setField(newField)
   }
 
+  const updateCounter = () => {
+    const newOpenedCount = logic.countOpenedCells(isOpenedMatrix)
+    setOpenedCount(newOpenedCount)
+    setStatus(
+      logic.checkForVictory(
+        newOpenedCount,
+        markedCount,
+        fieldHeight * fieldWidth,
+        countOfMines
+      )
+    )
+  }
+
   const openCell = (rowIndex: number, colIndex: number, fIeld: number[][]) => {
     if (field[rowIndex][colIndex] === -1) {
       setGameOver(rowIndex, colIndex)
@@ -48,17 +61,8 @@ const Game: React.FC<GameProps> = ({
         colIndex,
         rowIndex
       )
-      const newOpenedCount = logic.countOpenedCells(isOpenedMatrix)
       setIsOpenedMatrix(newIsOpenedMatrix)
-      setOpenedCount(newOpenedCount)
-      setStatus(
-        logic.checkForVictory(
-          newOpenedCount,
-          markedCount,
-          fieldHeight * fieldWidth,
-          countOfMines
-        )
-      )
+      updateCounter()
     }
   }
 
@@ -76,6 +80,27 @@ const Game: React.FC<GameProps> = ({
     setIsMarkedMatrix(
       logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
     )
+  }
+
+  const cellMarkHandler = (rowIndex: number, colIndex: number) => {
+    const newIsMarkedMatrix = [...isMarkedMatrix]
+    newIsMarkedMatrix[rowIndex][colIndex] =
+      !newIsMarkedMatrix[rowIndex][colIndex]
+    setIsMarkedMatrix(newIsMarkedMatrix)
+    if (status === 1) {
+      const newMarkedCount = isMarkedMatrix[rowIndex][colIndex]
+        ? markedCount + 1
+        : markedCount - 1
+      setMarkedCount(newMarkedCount)
+      setStatus(
+        logic.checkForVictory(
+          openedCount,
+          newMarkedCount,
+          fieldHeight * fieldWidth,
+          countOfMines
+        )
+      )
+    }
   }
 
   const cellOpenHandler = (rowIndex: number, colIndex: number) => {
@@ -99,6 +124,7 @@ const Game: React.FC<GameProps> = ({
       if (!result.isSuccess) {
         setGameOver(result.mine!.y, result.mine!.x)
       }
+      updateCounter()
     }
   }
 
@@ -115,47 +141,33 @@ const Game: React.FC<GameProps> = ({
     setStatus(GameStatus.notStarted)
   }
 
+  const gameStatusLabel = useMemo(
+    () => logic.checkForGameOver(status),
+    [status]
+  )
+
   return (
-    <div className="flex justify-center">
-      <div>
-        <h1
-          className={`text-center ${
-            status === 3 ? "win text-lg mb-1" : "game-over mb-2"
-          }`}
-        >
-          {logic.checkForGameOver(`${status}`)}
-        </h1>
-        <Field
-          status={status}
-          field={field}
-          isOpenedMatrix={isOpenedMatrix}
-          isMarkedMatrix={isMarkedMatrix}
-          onCellOpen={cellOpenHandler}
-          onNearbyOpen={nearbyOpenHandler}
-          onCellMark={(rowIndex, colIndex) => {
-            const newIsMarkedMatrix = [...isMarkedMatrix]
-            newIsMarkedMatrix[rowIndex][colIndex] =
-              !newIsMarkedMatrix[rowIndex][colIndex]
-            setIsMarkedMatrix(newIsMarkedMatrix)
-            if (status === 1) {
-              const newMarkedCount = isMarkedMatrix[rowIndex][colIndex]
-                ? markedCount + 1
-                : markedCount - 1
-              setMarkedCount(newMarkedCount)
-              setStatus(
-                logic.checkForVictory(
-                  openedCount,
-                  newMarkedCount,
-                  fieldHeight * fieldWidth,
-                  countOfMines
-                )
-              )
-            }
-          }}
-        />
-        <div className="mt-4 text-center">
-          <Button onClick={restartGame}> Restart </Button>
-        </div>
+    <div className="flex items-center flex-col">
+      <h1
+        className={`text-center ${
+          status === 3 ? "win text-lg mb-1" : "game-over mb-2"
+        }`}
+      >
+        {gameStatusLabel || <span>&nbsp;</span>}
+      </h1>
+      <Field
+        status={status}
+        field={field}
+        isOpenedMatrix={isOpenedMatrix}
+        isMarkedMatrix={isMarkedMatrix}
+        onCellOpen={cellOpenHandler}
+        onNearbyOpen={nearbyOpenHandler}
+        onCellMark={cellMarkHandler}
+      />
+      <div className="mt-4 text-center w-32">
+        <Button colour="black" shape="rounded" onClick={restartGame}>
+          Restart
+        </Button>
       </div>
     </div>
   )

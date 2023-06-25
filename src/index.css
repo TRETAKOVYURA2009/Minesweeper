@@ -36,9 +36,11 @@ input[type=number] {
 
 /* ---- field styles ----*/
 
-.numbers{
+.mont{
   font-family: "MontExtralight";
 }
+
+/* ---- Fonts ---- */
 
 @font-face {
   font-family: "MontExtralight";
@@ -57,6 +59,13 @@ input[type=number] {
 @font-face {
   font-family: "CinzelDecorative";
   src: url("../fonts/CinzelDecorative-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Balans";
+  src: url("../fonts/Balans-Normal.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
 }
@@ -100,4 +109,16 @@ input[type=number] {
 
 .game-over{
   font-family: "CinzelDecorative";
+}
+
+.balans {
+  font-family: "Balans";
+}
+
+.bricks {
+  background-image: url(./Phons/whiteBricks.jpg);
+}
+
+.bg-easy {
+  background-image: url();
 }

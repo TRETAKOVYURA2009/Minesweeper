@@ -1,12 +1,17 @@
-import React, { useState } from "react"
-import Field from "./components/Field"
-import Game from "./components/Game"
+import React from "react"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import PageLinks from "./types/pages"
+import { HomePage, EasyLevel, CustomLevel, NormalLevel } from "./pages"
 
 const App: React.FC = () => (
-  <div>
-    <h1 className="text-center">Minesweeper</h1>
-    <Game fieldWidth={4} fieldHeight={4} countOfMines={3} />
-  </div>
+  <BrowserRouter>
+    <Routes>
+      <Route path={PageLinks.home} element={<HomePage />} />
+      <Route path={PageLinks.easyLevel} element={<EasyLevel />} />
+      <Route path={PageLinks.customLevel} element={<CustomLevel />} />
+      <Route path={PageLinks.normalLevel} element={<NormalLevel />} />
+    </Routes>
+  </BrowserRouter>
 )
 
 export default App

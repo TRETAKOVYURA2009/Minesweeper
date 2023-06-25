@@ -1,3 +1,5 @@
+import GameStatus from "../types/game"
+
 export function getRandNumber(min: number, max: number) {
   return Math.ceil(Math.random() * (max - min) + min)
 }
@@ -41,8 +43,8 @@ export function checkForVictory(
   return 1
 }
 
-export function checkForGameOver(status: string) {
-  if (status === "2") return "GAME OVER"
-  if (status === "3") return "WIN"
-  return ""
+export function checkForGameOver(status: GameStatus) {
+  if (status === GameStatus.gameOver) return "GAME OVER"
+  if (status === GameStatus.finished) return "WIN"
+  return undefined
 }

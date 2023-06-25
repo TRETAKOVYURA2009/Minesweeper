@@ -14,7 +14,7 @@ const CellWrapper: React.FC<PropsWithChildren<CellWrapperProps>> = ({
   explosion = false,
 }) => (
   <div
-    className={`w-7 h-7 numbers flex justify-center items-center field-cell overflow-hidden ${
+    className={`w-7 h-7 mont flex justify-center items-center field-cell overflow-hidden ${
       opened ? "bg-white opened" : "bg-neutral-300"
     } ${explosion ? "explosion" : ""}`}
   >
