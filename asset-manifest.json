@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Minesweeper/static/css/main.fa443752.css",
+    "main.js": "/Minesweeper/static/js/main.e645c1fc.js",
+    "static/js/787.28cb0dcd.chunk.js": "/Minesweeper/static/js/787.28cb0dcd.chunk.js",
+    "static/media/mont_heavydemo.ttf": "/Minesweeper/static/media/mont_heavydemo.daa26bfb63618aad17f7.ttf",
+    "static/media/whiteBricks.jpg": "/Minesweeper/static/media/whiteBricks.83a895ab9e67623a81e8.jpg",
+    "static/media/CinzelDecorative-Bold.ttf": "/Minesweeper/static/media/CinzelDecorative-Bold.2231352722daaa24f611.ttf",
+    "static/media/Cheque-Black.ttf": "/Minesweeper/static/media/Cheque-Black.bbe126727b4e9d54aea5.ttf",
+    "static/media/Balans-Normal.ttf": "/Minesweeper/static/media/Balans-Normal.399b51853eefb4eaea6c.ttf",
+    "static/media/boom.svg": "/Minesweeper/static/media/boom.946fca2358cfa013a0ccf0a724cd9856.svg",
+    "static/media/mine.svg": "/Minesweeper/static/media/mine.5db9cf19f2ba625e0bf2c21a25d338b2.svg",
+    "static/media/backIcon.svg": "/Minesweeper/static/media/backIcon.7c8eca84f55f61ba2391e9ac2b7b1ef4.svg",
+    "static/media/flag.svg": "/Minesweeper/static/media/flag.5fe61f14d1453a4a23835f1a073fab4a.svg",
+    "index.html": "/Minesweeper/index.html",
+    "main.fa443752.css.map": "/Minesweeper/static/css/main.fa443752.css.map",
+    "main.e645c1fc.js.map": "/Minesweeper/static/js/main.e645c1fc.js.map",
+    "787.28cb0dcd.chunk.js.map": "/Minesweeper/static/js/787.28cb0dcd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fa443752.css",
+    "static/js/main.e645c1fc.js"
+  ]
+}
