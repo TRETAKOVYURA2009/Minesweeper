@@ -6,7 +6,7 @@ import Button from "../components/ui/Button"
 export const HomePage: React.FC = () => {
   const navigate = useNavigate()
   return (
-    <div className="flex justify-center min-h-screen bricks">
+    <div className="flex justify-center h-screen bg-homePage">
       <ul className="mt-28 text-center">
         <li>
           <h1 className="text-4xl balans">MineSweeper</h1>
@@ -35,7 +35,7 @@ export const HomePage: React.FC = () => {
             <div>
               <Button
                 colour="red"
-                onClick={() => navigate(PageLinks.customLevel)}
+                onClick={() => navigate(PageLinks.hardLevel)}
               >
                 Hard
               </Button>

@@ -1,4 +1,4 @@
-import GameStatus from "../types/game"
+import { GameStatus } from "../types/game"
 
 export function getRandNumber(min: number, max: number) {
   return Math.ceil(Math.random() * (max - min) + min)

@@ -1,3 +1,3 @@
-import GameStatus from "./game"
+import { GameStatus, FieldParams } from "./game"
 
 export default { GameStatus }

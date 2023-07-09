@@ -1,9 +1,13 @@
 // eslint-disable-next-line no-shadow
-enum GameStatus {
+export enum GameStatus {
   notStarted,
   started,
   gameOver,
   finished,
 }
 
-export default GameStatus
+export type FieldParams = {
+  width: number
+  height: number
+  countOfMines: number
+}

@@ -5,7 +5,7 @@ import PageLinks from "../types/pages"
 import Button from "../components/ui/Button"
 import { ReactComponent as BackIcon } from "../icons/backIcon.svg"
 
-export const NormalLevel: React.FC = () => {
+export const HardLevel: React.FC = () => {
   const navigate = useNavigate()
   return (
     <div className="pt-2 pl-2 h-screen">
@@ -19,8 +19,8 @@ export const NormalLevel: React.FC = () => {
       <div className="flex items-center justify-center">
         <ul>
           <h1 className="text-center text-2xl balans">MineSweeper</h1>
-          <h3 className="text-center text-xl mont">Normal level</h3>
-          <Game fieldWidth={16} fieldHeight={16} countOfMines={40} />
+          <h3 className="text-center text-xl mont">Hard level</h3>
+          <Game fieldWidth={30} fieldHeight={16} countOfMines={99} />
         </ul>
       </div>
     </div>

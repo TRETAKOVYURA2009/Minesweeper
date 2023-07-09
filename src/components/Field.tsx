@@ -1,6 +1,6 @@
 import React from "react"
 import Cell from "./Cell"
-import GameStatus from "../types/game"
+import { GameStatus } from "../types/game"
 
 interface FieldProps {
   status: GameStatus
@@ -39,7 +39,7 @@ const Field: React.FC<FieldProps> = ({
     } else if (
       event.nativeEvent.button === 2 &&
       !isOpenedMatrix[rIndex][cIndex] &&
-      (status === 0 || status === 1)
+      status === GameStatus.started
     ) {
       onCellMark(rIndex, cIndex)
     }

@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 export enum ButtonColours {
-  black = "bg-neutral-800 text-white",
+  black = "bg-black text-white",
   pink = "bg-pink-700 text-white",
   green = "bg-green-500 text-white",
   red = "bg-red-600 text-white",

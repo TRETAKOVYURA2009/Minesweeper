@@ -8,8 +8,8 @@ import { ReactComponent as BackIcon } from "../icons/backIcon.svg"
 export const EasyLevel: React.FC = () => {
   const navigate = useNavigate()
   return (
-    <div className="bg-easy min-h-screen">
-      <div className="ml-2 mt-2 w-28">
+    <div className="pt-2 pl-2 h-screen">
+      <div className="w-28">
         <Button colour="pink" onClick={() => navigate(PageLinks.home)}>
           <div>
             <BackIcon className="w-8 h-7 mx-3" />

@@ -1,8 +1,9 @@
 import React, { useMemo, useState } from "react"
 import Field from "./Field"
 import logic from "../gameLogic"
-import GameStatus from "../types/game"
+import { GameStatus, FieldParams } from "../types/game"
 import Button from "./ui/Button"
+import StopWatch from "./StopWatch"
 
 interface GameProps {
   fieldWidth: number
@@ -15,14 +16,19 @@ const Game: React.FC<GameProps> = ({
   fieldHeight,
   countOfMines,
 }) => {
+  const [fieldParams, setFieldParams] = useState<FieldParams>({
+    width: fieldWidth,
+    height: fieldHeight,
+    countOfMines,
+  })
   const [isOpenedMatrix, setIsOpenedMatrix] = useState(
-    logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
+    logic.createMatrixWithValue(false, fieldParams.width, fieldParams.height)
   )
   const [isMarkedMatrix, setIsMarkedMatrix] = useState<boolean[][]>(
-    logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
+    logic.createMatrixWithValue(false, fieldParams.width, fieldParams.height)
   )
   const [field, setField] = useState<number[][]>(
-    logic.createMatrixWithValue(0, fieldWidth, fieldHeight)
+    logic.createMatrixWithValue(0, fieldParams.width, fieldParams.height)
   )
   const [openedCount, setOpenedCount] = useState<number>(0)
   const [markedCount, setMarkedCount] = useState<number>(0)
@@ -31,7 +37,7 @@ const Game: React.FC<GameProps> = ({
   const setGameOver = (rowIndex: number, colIndex: number) => {
     setStatus(GameStatus.gameOver)
     setIsOpenedMatrix(
-      logic.createMatrixWithValue(true, fieldWidth, fieldHeight)
+      logic.createMatrixWithValue(true, fieldParams.width, fieldParams.height)
     )
     const newField = [...field]
     newField[rowIndex][colIndex] = -2
@@ -45,8 +51,8 @@ const Game: React.FC<GameProps> = ({
       logic.checkForVictory(
         newOpenedCount,
         markedCount,
-        fieldHeight * fieldWidth,
-        countOfMines
+        fieldParams.height * fieldParams.width,
+        fieldParams.countOfMines
       )
     )
   }
@@ -70,15 +76,19 @@ const Game: React.FC<GameProps> = ({
     const mines = logic.getMines(
       rowIndex,
       colIndex,
-      fieldWidth,
-      fieldHeight,
-      countOfMines
+      fieldParams.width,
+      fieldParams.height,
+      fieldParams.countOfMines
     )
-    const newField = logic.generateFieldMatrix(fieldHeight, fieldWidth, mines)
+    const newField = logic.generateFieldMatrix(
+      fieldParams.height,
+      fieldParams.width,
+      mines
+    )
     setField(newField)
     openCell(rowIndex, colIndex, newField)
     setIsMarkedMatrix(
-      logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
+      logic.createMatrixWithValue(false, fieldParams.width, fieldParams.height)
     )
   }
 
@@ -96,8 +106,8 @@ const Game: React.FC<GameProps> = ({
         logic.checkForVictory(
           openedCount,
           newMarkedCount,
-          fieldHeight * fieldWidth,
-          countOfMines
+          fieldParams.height * fieldParams.width,
+          fieldParams.countOfMines
         )
       )
     }
@@ -129,6 +139,7 @@ const Game: React.FC<GameProps> = ({
   }
 
   const restartGame = () => {
+    setFieldParams({ width: fieldWidth, height: fieldHeight, countOfMines })
     setField(logic.createMatrixWithValue(0, fieldWidth, fieldHeight))
     setIsOpenedMatrix(
       logic.createMatrixWithValue(false, fieldWidth, fieldHeight)
@@ -148,6 +159,7 @@ const Game: React.FC<GameProps> = ({
 
   return (
     <div className="flex items-center flex-col">
+      <StopWatch status={status} />
       <h1
         className={`text-center ${
           status === 3 ? "win text-lg mb-1" : "game-over mb-2"
@@ -164,7 +176,7 @@ const Game: React.FC<GameProps> = ({
         onNearbyOpen={nearbyOpenHandler}
         onCellMark={cellMarkHandler}
       />
-      <div className="mt-4 text-center w-32">
+      <div className="my-4 text-center w-32">
         <Button colour="black" shape="rounded" onClick={restartGame}>
           Restart
         </Button>

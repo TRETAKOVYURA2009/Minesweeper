@@ -111,14 +111,12 @@ input[type=number] {
   font-family: "CinzelDecorative";
 }
 
+
+
 .balans {
   font-family: "Balans";
 }
 
-.bricks {
-  background-image: url(./Phons/whiteBricks.jpg);
-}
-
-.bg-easy {
-  background-image: url();
+.bg-homePage {
+  background-image: url(./backGrounds/whiteBricks.jpg);
 }
