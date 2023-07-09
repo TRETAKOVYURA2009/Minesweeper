@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { Routes, Route, HashRouter } from "react-router-dom"
 import PageLinks from "./types/pages"
 import {
   HomePage,
@@ -10,7 +10,7 @@ import {
 } from "./pages"
 
 const App: React.FC = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path={PageLinks.home} element={<HomePage />} />
       <Route path={PageLinks.easyLevel} element={<EasyLevel />} />
@@ -18,7 +18,7 @@ const App: React.FC = () => (
       <Route path={PageLinks.normalLevel} element={<NormalLevel />} />
       <Route path={PageLinks.hardLevel} element={<HardLevel />} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default App
